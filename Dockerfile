@@ -1,4 +1,10 @@
-FROM n8nio/n8n:2.3.4
+FROM n8nio/n8n:latest
+
 USER root
-RUN apk add --no-cache tesseract-ocr tesseract-ocr-data-spa
+
+# Actualizamos repositorios e instalamos Tesseract + Español usando apt-get (para Debian)
+RUN apt-get update && \
+    apt-get install -y tesseract-ocr tesseract-ocr-spa && \
+    rm -rf /var/lib/apt/lists/*
+
 USER node
